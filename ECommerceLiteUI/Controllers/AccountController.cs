@@ -46,7 +46,7 @@ namespace ECommerceLiteUI.Controllers
                 {
                     return View(model);
                 }
-                
+
                 var checkUserTC = myUserStore.Context.Set<Customer>().FirstOrDefault(x => x.TCNumber == model.TCNumber)?.TCNumber;
                 if (checkUserTC != null)
                 {
@@ -91,7 +91,7 @@ namespace ECommerceLiteUI.Controllers
                     string siteUrl = Request.Url.Scheme
                         + Uri.SchemeDelimiter
                         + Request.Url.Host
-                        + (Request.Url.IsDefaultPort? "" : ":" +Request.Url.Port);
+                        + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
 
                     await SiteSettings.SendMail(new MailModel()
                     {
@@ -103,7 +103,7 @@ namespace ECommerceLiteUI.Controllers
                         $"Aktivasyon Linkine</a></b> tıklayınız..."
                     });
 
-                    return RedirectToAction("Login","Account",new { email=$"{newUser.Email}"});
+                    return RedirectToAction("Login", "Account", new { email = $"{newUser.Email}" });
 
 
 
@@ -127,7 +127,7 @@ namespace ECommerceLiteUI.Controllers
         {
             try
             {
-               
+
                 var theUser = myUserStore.Context.Set<ApplicationUser>().FirstOrDefault(x => x.ActivationCode == code);
                 if (theUser == null)
                 {
@@ -147,7 +147,7 @@ namespace ECommerceLiteUI.Controllers
 
                 PassiveUser thePassiveUser = myPassiveUserRepo.Queryable().FirstOrDefault(x => x.UserId == theUser.Id);
 
-                if (thePassiveUser!=null)
+                if (thePassiveUser != null)
                 {
                     if (thePassiveUser.TargetRole == TheIdentityRoles.Customer)
                     {
@@ -155,8 +155,8 @@ namespace ECommerceLiteUI.Controllers
                         Customer newCustomer = new Customer()
                         {
                             TCNumber = thePassiveUser.TCNumber,
-                            UserId=thePassiveUser.UserId,
-                            
+                            UserId = thePassiveUser.UserId,
+
                         };
                         myCustomerRepo.Insert(newCustomer);
                         //pasif tablosundan bu rol silinsin
@@ -222,7 +222,7 @@ namespace ECommerceLiteUI.Controllers
                     ModelState.AddModelError(string.Empty, "EMail veya şifreyi doğru girdiğinizden emin olunuz...");
                     return View(model);
                 }
-                if (theUser.Roles.FirstOrDefault().RoleId == myRoleManager.FindByName(Enum.GetName(typeof(TheIdentityRoles),TheIdentityRoles.Passive)).Id)
+                if (theUser.Roles.FirstOrDefault().RoleId == myRoleManager.FindByName(Enum.GetName(typeof(TheIdentityRoles), TheIdentityRoles.Passive)).Id)
                 {
                     ViewBag.theResult = "Sistemi kullanabilmeniz için üyeliğinizi aktifleştirmeniz gerekmektedir. Emailinize gönderilen aktivasyon linkine tıklayarak aktifleştirme işlemini yapabilirsiniz. ";
                     return View(model);
@@ -265,5 +265,66 @@ namespace ECommerceLiteUI.Controllers
                 return View(model);
             }
         }
+
+        [HttpGet]
+        public ActionResult UpdatePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UpdatePassword(ProfileViewModel model)
+        {
+            try
+            {
+                if (model.NewPassword!=model.ConfirmNewPassword)
+                {
+                    ModelState.AddModelError("", "Şifreler uyuşmuyor!");
+                    //TODO: Profile gönderilmiş ???
+                    return View(model);
+                }
+
+                var theUser = myUserManager.FindById(HttpContext.User.Identity.GetUserId());
+                var theCheckUser = myUserManager.Find(theUser.UserName, model.OldPassword);
+                if (theCheckUser ==null)
+                {
+                    ModelState.AddModelError("", "Mevcu şifrinizi yanlış girdiniz!");
+                    //TODO: Profile gönderilmiş ???
+                    return View();
+                }
+
+                //Hash: şifreyi maskelemek
+                await myUserStore.SetPasswordHashAsync(theUser, myUserManager.PasswordHasher.HashPassword(model.NewPassword));
+                await myUserStore.UpdateAsync(theUser);
+                await myUserStore.Context.SaveChangesAsync();
+                TempData["PasswordUpdated"] = "Şifreniz değiştirilmiştir!";
+                HttpContext.GetOwinContext().Authentication.SignOut();
+                return RedirectToAction("Login","Account", new { email = theUser.Email });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Beklenmedik br hata oluştu!");
+                return View(model);
+               
+               //TODO: ex loglanacak
+            }
+        }
+
+        [Authorize]
+        public ActionResult UserProfile()
+        {
+            var theUser = myUserManager.FindById(HttpContext.User.Identity.GetUserId());
+            var model = new ProfileViewModel()
+            {
+                Email = theUser.Email,
+                Name = theUser.Name,
+                Surname = theUser.Surname,
+                Username = theUser.UserName
+            };
+            return View(model);
+        }
+
     }
 }
