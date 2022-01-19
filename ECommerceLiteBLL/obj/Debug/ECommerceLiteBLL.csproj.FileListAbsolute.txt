@@ -33,8 +33,6 @@ C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\ob
 C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj\Debug\ECommerceLiteBLL.dll
 C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj\Debug\ECommerceLiteBLL.pdb
 C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\bin\Debug\ECommerceLiteEntity.dll.config
-C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj\Debug\ECommerceLiteBLL.csproj.CoreCompileInputs.cache
-C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj\Debug\ECommerceLiteBLL.csproj.AssemblyReference.cache
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\bin\Debug\ECommerceLiteBLL.dll.config
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\bin\Debug\ECommerceLiteBLL.dll
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\bin\Debug\ECommerceLiteBLL.pdb
@@ -65,6 +63,8 @@ C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\bin
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\bin\Debug\Microsoft.Owin.Security.Cookies.xml
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\bin\Debug\Microsoft.Owin.Security.OAuth.xml
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj\Debug\ECommerceLiteBLL.csproj.AssemblyReference.cache
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj\Debug\ECommerceLiteBLL.csproj.CoreCompileInputs.cache
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj\Debug\ECommerceLiteBLL.csproj.CopyComplete
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj\Debug\ECommerceLiteBLL.dll
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj\Debug\ECommerceLiteBLL.pdb

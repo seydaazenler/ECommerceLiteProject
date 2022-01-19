@@ -1,0 +1,72 @@
+﻿@using ECommerceLiteUI.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="row margin-vert-30">
+    <!--Login Start-->
+    <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+
+        @Html.ValidationSummary()
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            if (ViewBag.sonuc != null)
+            {
+                <h4 class="text-center text-danger">@ViewBag.Sonuc</h4> <br />
+            }
+            if (ViewBag.updateSifre != null)
+            {
+                <h4 class="text-center text-danger">@ViewBag.TheResult</h4> <br />
+            }
+            <div class="login-header margin-bottom-30" align="center">
+                <h2 class="text-center">Giriş Yap</h2>
+            </div>
+            <br />
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                @if (ViewBag.Email != null)
+                {
+                    @Html.TextBoxFor(x => x.EMail, new { @class = "form-control", placeholder = ViewBag.Email })
+                }
+                else
+                {
+                    @Html.TextBoxFor(x => x.EMail, new { @class = "form-control", placeholder = "EPosta Adresiniz.." })
+                    @Html.ValidationMessageFor(x => x.EMail)
+                }
+            </div>
+            <br />
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon">
+                    <i class="fa fa-lock"></i>
+                </span>
+                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", type = "password", placeholder = "Şifre..." })
+                @Html.ValidationMessageFor(x => x.Password)
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <span>Beni Hatırla</span>
+                    @Html.CheckBoxFor(x => x.RememberMe)
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-info pull-right">Giriş Yap</button> <br />
+                </div>
+            </div>
+            <hr>
+            <h4 align="center">Şifrenizi mi unuttunuz?</h4>
+            <p align="center">
+                @Html.ActionLink("Yeni Şifre Talebiniz için BURAYA Tıklayınız", "RecoverPassword",
+               "Account", new { n = Model.EMail }, null)
+            </p>
+        }
+    </div>
+    <!-- End Login Box -->
+
+</div>
+
+    </div>
+</div>

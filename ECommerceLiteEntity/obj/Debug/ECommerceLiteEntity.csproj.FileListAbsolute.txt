@@ -14,11 +14,11 @@ C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteEntity
 C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\obj\Debug\ECommerceLiteEntity.csproj.CopyComplete
-C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\obj\Debug\ECommerceLiteEntity.csproj.CoreCompileInputs.cache
-C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\obj\Debug\ECommerceLiteEntity.csproj.AssemblyReference.cache
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\bin\Debug\ECommerceLiteEntity.dll.config
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\bin\Debug\ECommerceLiteEntity.dll
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\bin\Debug\ECommerceLiteEntity.pdb
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\obj\Debug\ECommerceLiteEntity.csproj.AssemblyReference.cache
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\obj\Debug\ECommerceLiteEntity.csproj.CoreCompileInputs.cache
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\obj\Debug\ECommerceLiteEntity.csproj.CopyComplete
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\obj\Debug\ECommerceLiteEntity.dll
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteEntity\obj\Debug\ECommerceLiteEntity.pdb

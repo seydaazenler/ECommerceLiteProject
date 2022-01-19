@@ -30,11 +30,6 @@ C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\ob
 C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.dll
 C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.pdb
 C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\bin\Debug\ECommerceLiteEntity.dll.config
-C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.Migrations.initializeDB.resources
-C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.Migrations.OrderEdited.resources
-C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.csproj.GenerateResource.cache
-C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.csproj.CoreCompileInputs.cache
-C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.csproj.AssemblyReference.cache
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\bin\Debug\ECommerceLiteDAL.dll.config
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\bin\Debug\ECommerceLiteDAL.dll
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\bin\Debug\ECommerceLiteDAL.pdb
@@ -62,7 +57,12 @@ C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\bin
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\bin\Debug\Microsoft.Owin.Security.Cookies.xml
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\bin\Debug\Microsoft.Owin.Security.OAuth.xml
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.csproj.AssemblyReference.cache
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.Migrations.initializeDB.resources
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.Migrations.OrderEdited.resources
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.Migrations.PassiveUserTableUpdated.resources
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.csproj.GenerateResource.cache
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.csproj.CoreCompileInputs.cache
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.csproj.CopyComplete
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.dll
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.pdb
-C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.Migrations.PassiveUserTableUpdated.resources

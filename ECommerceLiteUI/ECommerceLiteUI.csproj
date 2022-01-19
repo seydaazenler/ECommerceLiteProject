@@ -154,6 +154,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -169,6 +170,45 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Electro-Theme\blank.html" />
+    <Content Include="Electro-Theme\checkout.html" />
+    <Content Include="Electro-Theme\css\bootstrap.min.css" />
+    <Content Include="Electro-Theme\css\font-awesome.min.css" />
+    <Content Include="Electro-Theme\css\nouislider.min.css" />
+    <Content Include="Electro-Theme\css\slick-theme.css" />
+    <Content Include="Electro-Theme\css\slick.css" />
+    <Content Include="Electro-Theme\css\style.css" />
+    <Content Include="Electro-Theme\fonts\fontawesome-webfont.svg" />
+    <Content Include="Electro-Theme\fonts\slick.svg" />
+    <Content Include="Electro-Theme\img\103logo.png" />
+    <Content Include="Electro-Theme\img\hotdeal.png" />
+    <Content Include="Electro-Theme\img\logo.png" />
+    <Content Include="Electro-Theme\img\product01.png" />
+    <Content Include="Electro-Theme\img\product02.png" />
+    <Content Include="Electro-Theme\img\product03.png" />
+    <Content Include="Electro-Theme\img\product04.png" />
+    <Content Include="Electro-Theme\img\product05.png" />
+    <Content Include="Electro-Theme\img\product06.png" />
+    <Content Include="Electro-Theme\img\product07.png" />
+    <Content Include="Electro-Theme\img\product08.png" />
+    <Content Include="Electro-Theme\img\product09.png" />
+    <Content Include="Electro-Theme\img\shop01.png" />
+    <Content Include="Electro-Theme\img\shop02.png" />
+    <Content Include="Electro-Theme\img\shop03.png" />
+    <Content Include="Electro-Theme\index.html" />
+    <Content Include="Electro-Theme\js\bootstrap.min.js" />
+    <Content Include="Electro-Theme\js\jquery.min.js" />
+    <Content Include="Electro-Theme\js\jquery.zoom.min.js" />
+    <Content Include="Electro-Theme\js\main.js" />
+    <Content Include="Electro-Theme\js\nouislider.min.js" />
+    <Content Include="Electro-Theme\js\slick.min.js" />
+    <Content Include="Electro-Theme\product.html" />
+    <Content Include="Electro-Theme\screenshot\Checkout.png" />
+    <Content Include="Electro-Theme\screenshot\Index.png" />
+    <Content Include="Electro-Theme\screenshot\Product.png" />
+    <Content Include="Electro-Theme\screenshot\Regular.png" />
+    <Content Include="Electro-Theme\screenshot\Store.png" />
+    <Content Include="Electro-Theme\store.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -176,6 +216,15 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Compile Include="Models\ProfileViewModel.cs" />
+    <Content Include="Electro-Theme\fonts\fontawesome-webfont.eot" />
+    <Content Include="Electro-Theme\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Electro-Theme\fonts\fontawesome-webfont.woff" />
+    <Content Include="Electro-Theme\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Electro-Theme\fonts\FontAwesome.otf" />
+    <Content Include="Electro-Theme\fonts\slick.eot" />
+    <Content Include="Electro-Theme\fonts\slick.ttf" />
+    <Content Include="Electro-Theme\fonts\slick.woff" />
+    <Content Include="Electro-Theme\img\Thumbs.db" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -201,10 +250,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutUser.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Account\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

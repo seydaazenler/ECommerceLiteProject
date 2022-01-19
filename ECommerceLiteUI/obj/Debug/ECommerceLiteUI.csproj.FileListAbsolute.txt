@@ -104,8 +104,6 @@ C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteUI\bin
 C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteUI\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteUI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\103SABAH_GÖKHAN\source\repos\ECommerceLiteSolution\ECommerceLiteUI\bin\Microsoft.AspNet.Identity.Owin.xml
-C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\obj\Debug\ECommerceLiteUI.csproj.AssemblyReference.cache
-C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\obj\Debug\ECommerceLiteUI.csproj.CoreCompileInputs.cache
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\bin\ECommerceLiteUI.dll.config
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\bin\ECommerceLiteUI.dll
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\bin\ECommerceLiteUI.pdb
@@ -210,6 +208,8 @@ C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\bin\
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\bin\ECommerceLiteDAL.pdb
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\bin\ECommerceLiteDAL.dll.config
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\obj\Debug\ECommerceLiteUI.csproj.AssemblyReference.cache
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\obj\Debug\ECommerceLiteUI.csproj.CoreCompileInputs.cache
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\obj\Debug\ECommerceLiteUI.csproj.CopyComplete
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\obj\Debug\ECommerceLiteUI.dll
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteUI\obj\Debug\ECommerceLiteUI.pdb
