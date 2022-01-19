@@ -273,7 +273,7 @@ namespace ECommerceLiteUI.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize] //sisteme login olunmadığında erişimi engeller
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> UpdatePassword(ProfileViewModel model)
         {
