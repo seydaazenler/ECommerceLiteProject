@@ -85,7 +85,8 @@ namespace ECommerceLiteUI.Controllers
                     {
                         TCNumber = model.TCNumber,
                         UserId = newUser.Id,
-                        TargetRole = TheIdentityRoles.Customer
+                        TargetRole = TheIdentityRoles.Customer,
+                        LastActiveTime = DateTime.Now
                     };
                     myPassiveUserRepo.Insert(newPassiveUser);
 
@@ -158,7 +159,8 @@ namespace ECommerceLiteUI.Controllers
                         Customer newCustomer = new Customer()
                         {
                             TCNumber = thePassiveUser.TCNumber,
-                            UserId = thePassiveUser.UserId,
+                            UserId = theUser.Id,
+                            LastActiveTime=DateTime.Now
 
                         };
                         myCustomerRepo.Insert(newCustomer);
@@ -190,7 +192,7 @@ namespace ECommerceLiteUI.Controllers
         {
             try
             {
-                if (HttpContext.User.Identity.IsAuthenticated)
+                if (HttpContext.User.Identity.IsAuthenticated && ReturnUrl !=null)
                 {
                     var url = ReturnUrl.Split('/');
                     //TODO: Buraya devam edilecek
@@ -272,7 +274,21 @@ namespace ECommerceLiteUI.Controllers
         [HttpGet]
         public ActionResult UpdatePassword()
         {
+            var theUser = myUserManager.FindById(HttpContext.User.Identity.GetUserId());
+            if (theUser!=null)
+            {
+                ProfileViewModel model = new ProfileViewModel()
+                {
+                    Name = theUser.Name,
+                    Surname = theUser.Surname,
+                    Email = theUser.Email,
+                    Username = theUser.UserName
+                };
+                return View(model);
+            }
             return View();
+
+
         }
 
         [HttpPost]
@@ -290,18 +306,17 @@ namespace ECommerceLiteUI.Controllers
                 }
 
                 var theUser = myUserManager.FindById(HttpContext.User.Identity.GetUserId());
-                var theCheckUser = myUserManager.Find(theUser.UserName, model.OldPassword);
+                var theCheckUser = myUserManager.Find(theUser.UserName, model.CurrentPassword);
                 if (theCheckUser ==null)
                 {
-                    ModelState.AddModelError("", "Mevcu şifrinizi yanlış girdiniz!");
+                    ModelState.AddModelError("", "Mevcut şifrenizi yanlış girdiniz!");
                     //TODO: Profile gönderilmiş ???
                     return View();
                 }
 
                 //Hash: şifreyi maskelemek
                 await myUserStore.SetPasswordHashAsync(theUser, myUserManager.PasswordHasher.HashPassword(model.NewPassword));
-                await myUserStore.UpdateAsync(theUser);
-                await myUserStore.Context.SaveChangesAsync();
+                await myUserManager.UpdateAsync(theUser);
                 TempData["PasswordUpdated"] = "Şifreniz değiştirilmiştir!";
                 HttpContext.GetOwinContext().Authentication.SignOut();
                 return RedirectToAction("Login","Account", new { email = theUser.Email });
@@ -344,12 +359,20 @@ namespace ECommerceLiteUI.Controllers
                     ModelState.AddModelError("", "Kullanıcı bulunamadığı için işlem yapılamıyor!");
                     return View(model);
                 }
+
+                if (myUserManager.PasswordHasher.VerifyHashedPassword
+                    (theUser.PasswordHash, model.CurrentPassword) == PasswordVerificationResult.Failed)
+                {
+                    ModelState.AddModelError("", "Mevcut şifrenizi yanlış girdiğiniz için bilgilerinizi güncelleyemiyoruz!");
+                    return View(model);
+                }
+
+
                 theUser.Name = model.Name;
                 theUser.Surname = model.Surname;
                 //TODO: telefon numarası eklenebilir.
-                await myUserStore.UpdateAsync(theUser);
-                await myUserStore.Context.SaveChangesAsync();
-                ViewBag.TheResult = "Bilgileriniz güncelleşmiştir";
+                await myUserManager.UpdateAsync(theUser);
+                ViewBag.TheResult = "Bilgileriniz güncellenmiştir";
                 var newModel = new ProfileViewModel()
                 {
                     Email = theUser.Email,
@@ -396,8 +419,8 @@ namespace ECommerceLiteUI.Controllers
                 {
                     To = theUser.Email,
                     Subject = "ECommerceLite Site - Şifreniz Yenilendi",
-                    Message = $"Merhaba {theUser.Name} {theUser.Surname} <br/>Yeni Şifreniz :<b>{randomPassword}</b>" +
-                    $"Sisteme giriş yapmak için<b><a href='{siteUrl}/Account/Login?email={theUser.Email}'>BURAYA</a></b> tıklayınız."
+                    Message = $"Merhaba {theUser.Name} {theUser.Surname} <br/>Yeni Şifreniz :<b> {randomPassword} </b>" +
+                    $"Sisteme giriş yapmak için<b><a href='{siteUrl}/Account/Login?email={theUser.Email}'> BURAYA </a></b> tıklayınız."
                 });
                 ViewBag.theResult = "Email adresinize yeni şifreniz gönderilmiştir";
                 return View(); //emin olamadım

@@ -21,16 +21,16 @@ namespace ECommerceLiteUI.Models
         [EmailAddress]
         public string Email { get; set; }
 
-        [Display(Name = "Eski Şifre")]
+        [Display(Name = "Mevcut Şifre")]
         [DataType(DataType.Password)]
-        public string OldPassword { get; set; }
+        public string CurrentPassword { get; set; }
         [StringLength(100)]
         [Display(Name = "Yeni Şifre")]
         [DataType(DataType.Password)]
         [RegularExpression(@"^[a-zA-Z]\w{4,14}$", ErrorMessage = @"	
-            The password's first character must be a letter, it must 
-            contain at least 5 characters and no more than 15 characters and no 
-            characters other than letters, numbers and the underscore may be used")]
+            Şifrenin ilk karakteri bir harf olmalı,
+            en az 5 karakter ve en fazla 15 karakter içerir ve hayır
+            harfler, sayılar ve alt çizgi dışındaki karakterler kullanılabilir")]
         public string NewPassword { get; set; }
         [StringLength(100)]
         [Display(Name = "Yeni Şifre Tekrar")]

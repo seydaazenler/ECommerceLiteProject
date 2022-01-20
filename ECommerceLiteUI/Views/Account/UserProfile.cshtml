@@ -4,47 +4,65 @@
     ViewBag.Title = "UserProfile";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-<div class="row margin-vert-30">
-    <div class="col-md-12- col-md-offset-3 col-sm-offset-3">
-        <span class="text-danger">@Html.ValidationSummary()</span>
 
-        @using (Html.BeginForm("Profil", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+<div class="row margin-vert-30" style="margin-left:25%; margin-right:25%">
+    <div class="col-6 offset-3">
+        <span class="text-danger">@Html.ValidationSummary()</span>
+        @using (Html.BeginForm("UserProfile", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
-
             if (ViewBag.TheResult != null)
             {
                 <!-- Default Blockquote -->
                 <blockquote>
                     <p>
-                        <h4 class="col-md-12"><em>@ViewBag.TheResult</em></h4> <br />
+                        <h4 style="text-align:center"><em>@ViewBag.TheResult</em></h4> <br />
                     </p>
                 </blockquote>
                 <!-- End Default Blockquote -->
             }
             else
             {
-                <h4 class="col-md-12">Bilgileri güncelleyip, devam edebilirsiniz..</h4> <br /> <br />
+                <h4 style="text-align:center">Bilgilerinizi değiştirip, güncelle butonuna tıklayabilirsiniz...</h4> <br /> <br />
             }
-            
-            <div class="form-group col-md-6 col-md-offset-3">
-                @Html.Label("Email Adresiniz")
-                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" }) <br />
+
+            <div class="form-group col-4 offset-4">
+                <div class="form-group">
+                    @Html.Label("Email Adresiniz")
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control" }) <br />
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Adınız")
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" }) <br />
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Soyadınız")
+                    @Html.TextBoxFor(x => x.Surname, new { @class = "form-control" }) <br />
+
+                </div>
+                <div class="form-group">
+                    @Html.Label("Mevcut Şifreniz")
+                    @Html.PasswordFor(x => x.CurrentPassword, new { @class = "form-control" }) <br />
+
+                </div>
+                <div class="pull-right">
+                    <input type="button" value="Şifremi Değiştir" onclick="gotoupdatepasswordpage()" class="btn btn-default " style="background-color: white; color: #D10024; font-weight: bold; margin-right:5px">
+
+                    <button type="submit" value="Guncelle" class="btn btn-default" style="background-color:#D10024; color:white; "><b>Profilimi Güncelle</b></button>
+                </div>
             </div>
-            <div class="form-group col-md-6 col-md-offset-3">
-                @Html.Label("Adınız")
-                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" }) <br />
-            </div>
-            <div class="form-group col-md-6 col-md-offset-3">
-                @Html.Label("Soyadınız")
-                @Html.TextBoxFor(x => x.Surname, new { @class = "form-control" }) <br />
-            </div>
-            <div class="col-md-12">
-                <button type="submit" value="Guncelle" class="btn btn-lg btn-success"><b>Güncelle</b></button>
-            </div>
+
         }
 
     </div>
 </div>
-
+@section scripts{
+    <script>
+        function gotoupdatepasswordpage() {
+            window.location.assign("/Account/UpdatePassword")
+        }
+    </script>
+}
 
