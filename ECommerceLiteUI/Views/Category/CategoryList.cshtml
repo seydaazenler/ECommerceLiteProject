@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Tüm Kategoriler</h2>
-<br />
+
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Kategori Listesi</h3>
+       
+        <a href="/Category/Create" class="btn btn-info">Yeni Kategori Ekle</a>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -36,8 +36,10 @@
                                class="btn btn-sm btn-danger" style="margin-right:5px">Sil</a>
 
 
-                        <a href="/Category/ProductList/@item.Id"
-                        class="btn btn-sm btn-success" style="margin-right:5px">Ürünler</a>
+                            <a href="/Category/SubCategoryList?id=@item.Id&IsSendFromSubCategory=true"
+                               class="btn btn-sm btn-info" style="margin-right:5px">Alt Kategoriler</a>
+
+                            
                         </td>
                     </tr>
                 }

@@ -46,7 +46,7 @@ namespace ECommerceLiteBLL.Repository
             try
             {
                 dbContext = new MyContext();
-                return dbContext.Set<T>().Find();
+                return dbContext.Set<T>().Find(id);
 
             }
             catch (Exception ex)
