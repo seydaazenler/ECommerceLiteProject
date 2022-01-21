@@ -66,3 +66,4 @@ C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.csproj.CopyComplete
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.dll
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.pdb
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteDAL\obj\Debug\ECommerceLiteDAL.Migrations.CategoryTableUpdated.resources

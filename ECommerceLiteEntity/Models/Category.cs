@@ -18,9 +18,9 @@ namespace ECommerceLiteEntity.Models
         [StringLength(500,ErrorMessage ="Kategori açıklamasının uzunluğu en fazla 500 karakter olmalıdır!")]
         public string CategoryDescription { get; set; }
 
-        public int TopCategoryId { get; set; }
-        [ForeignKey("TopCategoryId")]
-        public virtual Category TopCategory { get; set; }
+        public int? BaseCategoryId { get; set; }
+        [ForeignKey("BaseCategoryId")]
+        public virtual Category BaseCategory { get; set; }
         public virtual List<Product> ProductList{ get; set; }
         public virtual List<Category> CategoryList { get; set; }
     }
