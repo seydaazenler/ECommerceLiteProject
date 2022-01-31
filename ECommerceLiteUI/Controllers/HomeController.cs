@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Mapster;
 using ECommerceLiteUI.Models;
 
+
 namespace ECommerceLiteUI.Controllers
 {
     public class HomeController : Controller
@@ -50,5 +51,50 @@ namespace ECommerceLiteUI.Controllers
 
             return View();
         }
+
+        public ActionResult AddToCart(int id)
+        {
+            try
+            {
+                var shoppingCart =
+                    Session["ShoppingCart"] as List<CartViewModel>;
+                if (shoppingCart == null)
+                {
+                    shoppingCart = new List<CartViewModel>();
+                }
+                if (id > 0)
+                {
+                    var product =
+                        myProductRepo.GetById(id);
+                    if (product == null)
+                    {
+                        TempData["AddToCart"] = "Ürün ekleme işlemi başarısız! Lütfen Tekrar Deneyiniz";
+                        return RedirectToAction("Index", "Home");
+                    }
+                    var productAddtoCart = product.Adapt<CartViewModel>();
+                    if (shoppingCart.Count(x => x.Id == productAddtoCart.Id) > 0)
+                    {
+                        shoppingCart.FirstOrDefault(x => x.Id == productAddtoCart.Id).Quantity++;
+                    }
+                    else
+                    {
+                        productAddtoCart.Quantity = 1;
+                        shoppingCart.Add(productAddtoCart);
+                    }
+                    Session["ShoppingCart"] = shoppingCart;
+                    TempData["AddToCart"] = "Ürün Eklendi";
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                TempData["AddToCart"] = "Ürün ekleme işlemi başarısız! Lütfen Tekrar Deneyiniz";
+                return RedirectToAction("Index", "Home");
+
+            }
+        }
+
+
     }
 }
