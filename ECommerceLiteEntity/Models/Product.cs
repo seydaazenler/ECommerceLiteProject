@@ -16,6 +16,11 @@ namespace ECommerceLiteEntity.Models
         public string ProductName { get; set; }
         [StringLength(500,ErrorMessage = "Ürün açıklamasının uzunluğu en fazla 500 karakter olmalıdır!")]
         public string Description { get; set; }
+        [StringLength(8,ErrorMessage ="Ürün kodunun uzunluğu en fazla 8 karakter olmalıdır!")]
+        //ürün kodu her ürüne özel olmalıdır tekrar etmesini önlemek için verildi
+        [Index(IsUnique =true)]
+        public string ProductCode { get; set; }
+        
         [Required]
         [DataType(DataType.Currency)] //Currency : para birimi
         public decimal Price { get; set; }
@@ -25,5 +30,7 @@ namespace ECommerceLiteEntity.Models
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
+
+        public virtual List<ProductPicture> ProductPictureList { get; set; }
     }
 }

@@ -7,8 +7,7 @@ namespace ECommerceLiteDAL.Migrations
     {
         public override void Up()
         {
-            DropIndex("dbo.Categories", new[] { "TopCategoryId" });
-            RenameColumn(table: "dbo.Categories", name: "TopCategoryId", newName: "BaseCategoryId");
+            DropIndex("dbo.Categories", new[] { "BaseCategoryId" });
             AlterColumn("dbo.Categories", "BaseCategoryId", c => c.Int());
             CreateIndex("dbo.Categories", "BaseCategoryId");
         }
@@ -17,8 +16,7 @@ namespace ECommerceLiteDAL.Migrations
         {
             DropIndex("dbo.Categories", new[] { "BaseCategoryId" });
             AlterColumn("dbo.Categories", "BaseCategoryId", c => c.Int(nullable: false));
-            RenameColumn(table: "dbo.Categories", name: "BaseCategoryId", newName: "TopCategoryId");
-            CreateIndex("dbo.Categories", "TopCategoryId");
+            CreateIndex("dbo.Categories", "BaseCategoryId");
         }
     }
 }

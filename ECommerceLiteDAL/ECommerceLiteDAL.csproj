@@ -93,6 +93,14 @@
     <Compile Include="Migrations\202201210558364_CategoryTableUpdated.Designer.cs">
       <DependentUpon>202201210558364_CategoryTableUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201310557215_ProdutCodeAdded.cs" />
+    <Compile Include="Migrations\202201310557215_ProdutCodeAdded.Designer.cs">
+      <DependentUpon>202201310557215_ProdutCodeAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201310612216_ProductPictureTableUpdated.cs" />
+    <Compile Include="Migrations\202201310612216_ProductPictureTableUpdated.Designer.cs">
+      <DependentUpon>202201310612216_ProductPictureTableUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,6 +127,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201210558364_CategoryTableUpdated.resx">
       <DependentUpon>202201210558364_CategoryTableUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201310557215_ProdutCodeAdded.resx">
+      <DependentUpon>202201310557215_ProdutCodeAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201310612216_ProductPictureTableUpdated.resx">
+      <DependentUpon>202201310612216_ProductPictureTableUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
