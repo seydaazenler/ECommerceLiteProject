@@ -1,4 +1,5 @@
-﻿@{
+﻿@using ECommerceLiteBLL.Account
+@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -50,9 +51,18 @@
                     <li><a href="#"><i class="fa fa-map-marker"></i> istanbul, TÜRKİYE </a></li>
                 </ul>
                 <ul class="header-links pull-right">
-                    <li><a href="/Account/UserProfile"><i class="fa fa-user-o"></i>HESABIM</a></li>
-                    <li><a href="/Account/Logout"><i class="fa fa-user-o"></i>Çıkış Yap</a></li>
+                    @if (MembershipTools.GetUser() != null)
+                    {
 
+                        <li><a href="/Account/UserProfile"><i class="fa fa-user-o"></i>HESABIM</a></li>
+                        <li><a href="/Account/Logout"><i class="fa fa-sign-out"></i>Çıkış Yap</a></li>
+
+
+                    }
+                    else
+                    {
+                        <li><a href="/Account/Login"><i class="fa fa-sign-out"></i>Giriş Yap</a></li>
+                    }
                 </ul>
             </div>
         </div>
@@ -277,6 +287,6 @@
 
 
 </body>
-@RenderSection("scripts",required:false)
+@RenderSection("scripts", required: false)
 </html>
 
