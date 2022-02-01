@@ -8,10 +8,15 @@ using Mapster;
 using ECommerceLiteUI.Models;
 using ECommerceLiteEntity.Models;
 using ECommerceLiteBLL.Account;
+using QRCoder;
+using System.Drawing;
+using ECommerceLiteBLL.Settings;
+using ECommerceLiteEntity.ViewModels;
+using System.Threading.Tasks;
 
 namespace ECommerceLiteUI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         //Global Alan
         CategoryRepo myCategoryRepo = new CategoryRepo();
@@ -25,7 +30,8 @@ namespace ECommerceLiteUI.Controllers
             //Take(4) vererek sadece 4 tanesinin görünmesini sağlarız
             // var categoryList = myCategoryRepo.Queryable().Where(x => x.BaseCategoryId == null).Take(4).ToList(); 
             ViewBag.CategoryList = categoryList;
-            var productList = myProductRepo.GetAll();
+            //adedi 1 ve 1 den büyük olanları gösterecek
+            var productList = myProductRepo.Queryable().Where(x => x.Quantity >= 1).ToList();
 
             List<ProductViewModel> model = new List<ProductViewModel>();
             foreach (var item in productList)
@@ -99,7 +105,7 @@ namespace ECommerceLiteUI.Controllers
             }
         }
         [Authorize]
-        public ActionResult Buy()
+        public async Task<ActionResult> Buy()
         {
             try
             {
@@ -121,6 +127,8 @@ namespace ECommerceLiteUI.Controllers
                         int orderInsertResult = myOrderRepo.Insert(newOrder);
                         if (orderInsertResult > 0)
                         {
+
+                            bool isSuccess = false;
                             //eklendi ise
                             foreach (var item in shoppingCart)
                             {
@@ -147,10 +155,55 @@ namespace ECommerceLiteUI.Controllers
                                 int detailInsertResult = myOrderDetailRepo.Insert(newOrderDetail);
                                 if (detailInsertResult > 0)
                                 {
-                                    return RedirectToAction("Order", "Home", new { id = newOrder.Id });
+                                    isSuccess = true;
                                 }
                             }
 
+                            if (isSuccess)
+                            {
+                                //QR ile email gönderilecek
+                                
+                                #region SendEmail
+
+                                QRCodeGenerator QRGenerator = new QRCodeGenerator();
+                                QRCodeData QRData = QRGenerator.CreateQrCode(newOrder.OrderNumber, QRCodeGenerator.ECCLevel.Q);
+                                QRCode  QRCode = new QRCode(QRData);
+                                Bitmap QRBitmap = QRCode.GetGraphic(64);
+                                byte[] bitmapArray = BitmapToByteArray(QRBitmap);
+                                string QRUri = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(bitmapArray));
+
+                                List<OrderDetail> orderDetailList =
+                   new List<OrderDetail>();
+                                orderDetailList = myOrderDetailRepo.Queryable()
+                                    .Where(x => x.OrderId == newOrder.Id).ToList();
+
+                                string message = $"Merhaba {user.Name} {user.Surname} <br/>" +
+                                                   $"{orderDetailList.Count} adet ürünlerinizin siparişini aldık.<br/>" +
+                                                   $"Toplam Tutar:{orderDetailList.Sum(x => x.TotalPrice).ToString()} ₺ <br/> <br/>" +
+                                                   $"<table><tr><th>Ürün Adı</th><th>Adet</th><th>Birim Fiyat</th><th>Toplam</th></tr>";
+                                foreach (var item in orderDetailList)
+                                {
+                                    message += $"<tr><td>{myProductRepo.GetById(item.ProductId).ProductName}</td><td>{item.Quantity}</td><td>{item.TotalPrice}</td></tr>";
+                                }
+                                message += "</table><br/>Siparişinize ait QR kodunuz: <br/>";
+                                message += $"<a href='/Home/Order/{newOrder.Id}'><img src='{QRUri}' height=250px;  width=250px; class='img-thumbnail'/></a>";
+                                await SiteSettings.SendMail(new MailModel()
+                                {
+                                    To = user.Email,
+                                    Subject = "ECommerceLite - Siparişiniz alındı",
+                                    Message = message
+
+                                });
+
+                                #endregion
+
+                                //SendOrderMailWithQRCode(newOrder.Id);
+                                return RedirectToAction("Order", "Home", new { id = newOrder.Id });
+                            }
+                            else
+                            {
+                                //sonra değerlendirilecek
+                            }
                         }
 
                     }
@@ -165,17 +218,20 @@ namespace ECommerceLiteUI.Controllers
 
             }
         }
+
+        
+
         [Authorize]
-        public ActionResult Order(int id)
+        public ActionResult Order(int? id) //nullable olma durumu
         {
             try
             {
                 if (id > 0)
                 {
                     //order alma işlemi
-                    Order customerOrder = myOrderRepo.GetById(id);
+                    Order customerOrder = myOrderRepo.GetById(id.Value);
                     List<OrderDetail> orderDetails = new List<OrderDetail>();
-                    if (customerOrder!=null)
+                    if (customerOrder != null)
                     {
                         orderDetails = myOrderDetailRepo.Queryable().Where(x => x.OrderId == customerOrder.Id).ToList();
                         foreach (var item in orderDetails)
@@ -183,6 +239,7 @@ namespace ECommerceLiteUI.Controllers
                             item.Product = myProductRepo.GetById(item.ProductId);
                         }
                         ViewBag.OrderSuccess = "Siparişiniz başarıyla oluşturuldu";
+                        Session["ShoppingCart"] = null;
                         return View(orderDetails);
                     }
                     else
