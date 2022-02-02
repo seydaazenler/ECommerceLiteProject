@@ -1,4 +1,5 @@
 ﻿using ECommerceLiteBLL.Account;
+using ECommerceLiteBLL.Repository;
 using ECommerceLiteEntity.IdentityModels;
 using ECommerceLiteUI.Models;
 using System;
@@ -11,6 +12,9 @@ namespace ECommerceLiteUI.Controllers
 {
     public class PartialsController : BaseController
     {
+        //Global Alan
+
+        CategoryRepo myCategoryRepo = new CategoryRepo();
         private object MemberShipTools;
 
         public PartialViewResult AdminSideBarResult()
@@ -51,7 +55,12 @@ namespace ECommerceLiteUI.Controllers
             }
         }
 
-
+        public PartialViewResult AdminSideBarCategories()
+        {
+            //controller arasında veri taşımaya yarar Actiondan sayfaya veri taşıma
+            TempData["AllCategoriesCount"] = myCategoryRepo.Queryable().Where(x => x.BaseCategory == null).ToList().Count;
+            return PartialView("_PartialAdminSideBarCategories");
+        }
 
     }
 }

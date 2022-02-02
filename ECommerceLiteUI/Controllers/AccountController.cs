@@ -242,7 +242,7 @@ namespace ECommerceLiteUI.Controllers
                     (Enum.GetName(typeof(TheIdentityRoles), TheIdentityRoles.Admin))
                     .Id)
                 {
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Dashboard", "Admin");
 
                 }
                 if (theUser.Roles.FirstOrDefault().RoleId == myRoleManager.FindByName
