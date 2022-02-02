@@ -162,12 +162,12 @@ namespace ECommerceLiteUI.Controllers
                             if (isSuccess)
                             {
                                 //QR ile email gönderilecek
-                                
+
                                 #region SendEmail
 
                                 QRCodeGenerator QRGenerator = new QRCodeGenerator();
                                 QRCodeData QRData = QRGenerator.CreateQrCode(newOrder.OrderNumber, QRCodeGenerator.ECCLevel.Q);
-                                QRCode  QRCode = new QRCode(QRData);
+                                QRCode QRCode = new QRCode(QRData);
                                 Bitmap QRBitmap = QRCode.GetGraphic(64);
                                 byte[] bitmapArray = BitmapToByteArray(QRBitmap);
                                 string QRUri = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(bitmapArray));
@@ -185,8 +185,13 @@ namespace ECommerceLiteUI.Controllers
                                 {
                                     message += $"<tr><td>{myProductRepo.GetById(item.ProductId).ProductName}</td><td>{item.Quantity}</td><td>{item.TotalPrice}</td></tr>";
                                 }
+
+                                string siteUrl =
+                        Request.Url.Scheme + Uri.SchemeDelimiter
+                        + Request.Url.Host
+                        + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
                                 message += "</table><br/>Siparişinize ait QR kodunuz: <br/>";
-                                message += $"<a href='/Home/Order/{newOrder.Id}'><img src='{QRUri}' height=250px;  width=250px; class='img-thumbnail'/></a>";
+                                message += $"<a href='/Home/Order/{newOrder.Id}'><img src=\"{QRUri}\" height=250px;  width=250px; class='img-thumbnail'/></a>";
                                 await SiteSettings.SendMail(new MailModel()
                                 {
                                     To = user.Email,
@@ -219,18 +224,19 @@ namespace ECommerceLiteUI.Controllers
             }
         }
 
-        
+
 
         [Authorize]
         public ActionResult Order(int? id) //nullable olma durumu
         {
             try
             {
+                List<OrderDetail> orderDetails = new List<OrderDetail>();
                 if (id > 0)
                 {
                     //order alma işlemi
                     Order customerOrder = myOrderRepo.GetById(id.Value);
-                    List<OrderDetail> orderDetails = new List<OrderDetail>();
+
                     if (customerOrder != null)
                     {
                         orderDetails = myOrderDetailRepo.Queryable().Where(x => x.OrderId == customerOrder.Id).ToList();
@@ -250,8 +256,25 @@ namespace ECommerceLiteUI.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Ürün bulunamadı! Tekrar deneyiniz");
-                    return View(new List<OrderDetail>());
+                    //logged in user - kimin login olduğunu buluruz
+                    var user = MembershipTools.GetUser();
+                    //customer - customerı bulur
+                    var customer = myCustomerRepo.Queryable().FirstOrDefault(x => x.UserId == user.Id);
+                    //orders - customer ın tc numberı elimizde mevcut bu tc number ile yapılan siparişleri buluruz
+                    var orderList = myOrderRepo.Queryable().Where
+                        (x => x.CustomerTCNumber == customer.TCNumber).ToList();
+
+                    orderList = orderList.Where(x => x.RegisterDate >= DateTime.Now.AddMonths(-1)).ToList();
+                    //orderdetail - productdetail kısmından alınan orderdetail'i listeye yerleştirilir
+                    //orderList teki sahip olunan tüm order detayları gelir
+                    foreach (var item in orderList)
+                    {
+                        var detailList = myOrderDetailRepo.Queryable().Where(x => x.OrderId == item.Id).ToList();
+                        orderDetails.AddRange(detailList);
+                    }
+                    //order listesini sayfaya geri gönderir
+                    return View(orderDetails.OrderByDescending(x=> x.RegisterDate).ToList());
+
                 }
             }
             catch (Exception ex)
