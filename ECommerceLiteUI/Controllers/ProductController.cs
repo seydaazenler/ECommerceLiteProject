@@ -184,5 +184,52 @@ namespace ECommerceLiteUI.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ProductViewModel model)
+        {
+            try
+            {
+                var product = myProductRepo.GetById(model.Id);
+                product.ProductName = model.ProductName;
+                product.Description = model.Description;
+                product.Quantity = model.Quantity;
+                product.Price = model.Price;
+                if (model.Files.Any())
+                {
+                    //
+                }
+                int updateResult = myProductRepo.Update();
+                if (updateResult>0)
+                {
+                    return RedirectToAction("ProductList", "Product");
+                }
+                else
+                {
+                    //geçici
+                    return RedirectToAction("ProductList", "Product");
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                //ex loglanacak
+                //geçici
+                return RedirectToAction("ProductList", "Product");
+            }
+        }
+
+        public JsonResult GetProductDetails(int id)
+        {
+            var product = myProductRepo.GetById(id);
+            if (product!=null)
+            {
+                var data = product.Adapt<ProductViewModel>();
+                return Json(new {isSuccess = true, data}, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { isSuccess = false}, JsonRequestBehavior.AllowGet);
+        }
     }
 }
