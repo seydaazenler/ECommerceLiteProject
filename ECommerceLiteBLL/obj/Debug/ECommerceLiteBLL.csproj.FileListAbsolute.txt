@@ -68,3 +68,5 @@ C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj\Debug\ECommerceLiteBLL.csproj.CopyComplete
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj\Debug\ECommerceLiteBLL.dll
 C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\obj\Debug\ECommerceLiteBLL.pdb
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\bin\Debug\Mapster.Core.dll
+C:\Users\103SABAH_ŞEYDA\source\repos\ECommerceLiteSolution\ECommerceLiteBLL\bin\Debug\Mapster.dll

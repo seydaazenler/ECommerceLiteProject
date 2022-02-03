@@ -15,6 +15,8 @@ namespace ECommerceLiteUI.Controllers
         //Global Alan
 
         CategoryRepo myCategoryRepo = new CategoryRepo();
+        ProductRepo myProductRepo = new ProductRepo();
+
         private object MemberShipTools;
 
         public PartialViewResult AdminSideBarResult()
@@ -23,7 +25,7 @@ namespace ECommerceLiteUI.Controllers
             TempData["NameSurname"] = "";
             return PartialView("_PartialAdminSideBar");
         }
-       public PartialViewResult AdminSideBarMenuResult()
+        public PartialViewResult AdminSideBarMenuResult()
         {
 
             return PartialView("_PartialAdminSideBarMenu");
@@ -61,6 +63,12 @@ namespace ECommerceLiteUI.Controllers
             TempData["AllCategoriesCount"] = myCategoryRepo.Queryable().Where(x => x.BaseCategory == null).ToList().Count;
             return PartialView("_PartialAdminSideBarCategories");
         }
+
+        public PartialViewResult AdminSideBarProducts()
+        {
+            TempData["CategoryProductsCount"] = myProductRepo.GetAll().Count;
+            return PartialView("_PartialAdminSideBarProducts");
+        } 
 
     }
 }

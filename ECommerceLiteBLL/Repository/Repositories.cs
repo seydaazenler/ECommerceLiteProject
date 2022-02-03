@@ -1,5 +1,6 @@
 ﻿using ECommerceLiteEntity.Models;
 using ECommerceLiteEntity.ViewModels;
+using Mapster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,18 +20,25 @@ namespace ECommerceLiteBLL.Repository
         {
             List<ProductCountModel> list = new List<ProductCountModel>();
             dbContext = new ECommerceLiteDAL.MyContext();
-            var categoryList = from c in dbContext.Categories
-                               where c.BaseCategoryId == null
-                               select c;
-
+            var categoryList = this.Queryable()
+                .Where(x => x.BaseCategoryId == null).ToList();
             foreach (var item in categoryList)
             {
-                //sub categorys
-                var subCategoryList = from c in dbContext.Categories
-                                      where c.BaseCategoryId == item.Id
-                                      select c;
-
                 int productCount = 0;
+                #region AnaKategoriİçin
+                //Eğer bizim müşterimiz ana kategorilere ürün eklemeye izin verdiyse burada oluşan bug ı aşağıdaki kodla çözeriz
+                var baseCategoryProductList= from p in dbContext.Products
+                                             where p.CategoryId == item.Id
+                                             select p;
+
+                productCount = baseCategoryProductList.ToList().Count;
+                #endregion
+
+                //sub categoryleri
+                var subCategoryList = this.Queryable()
+                .Where(x => x.BaseCategoryId == item.Id).ToList();
+
+                
                 foreach (var subitem in subCategoryList)
                 {
                     var productList = from p in dbContext.Products
@@ -38,21 +46,16 @@ namespace ECommerceLiteBLL.Repository
                                       select p;
                     productCount += productList.ToList().Count;
                 }
-
                 list.Add(new ProductCountModel()
                 {
-
-                    BaseCategory = item,
+                    BaseCategory = item.Adapt<CategoryViewModel>(),
+                    BaseCategoryName = item.CategoryName,
                     ProductCount = productCount
-
-                });
+                }) ;
             }
 
             return list;
         }
-
-
-
 
     }
     public class ProductRepo : RepositoryBase<Product, int> { }
