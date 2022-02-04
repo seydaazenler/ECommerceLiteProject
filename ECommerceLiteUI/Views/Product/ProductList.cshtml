@@ -8,7 +8,16 @@
 }
 
 <h2>Sistemdeki Ürünler</h2>
-<br />
+@if (!string.IsNullOrEmpty(TempData["ProductModalError"] as String))
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Dikkat!</strong> @TempData["ProductModalError"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Kapat">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<br/>
 <div class="col-md-12">
     @using (Html.BeginForm("ProductList", "Product", FormMethod.Get))
     {
@@ -59,7 +68,7 @@
                                 <a href="/Product/Delete/@item.Id" class="btn btn-sm btn-danger" style=" margin-right:5px;">Sil</a>
                             </td>
                         </tr>
-}
+                    }
                 </tbody>
             </table>
             <div class="center">
@@ -95,6 +104,16 @@
                             <input id="Description" name="Description" class="form-control" />
                         </div>
                         <div class="form-group">
+                            <label for="CategoryId">Kategori Seç: </label>
+                            <select class="form-control" id="category" name="CategoryId">
+                                @foreach (var item in ViewBag.CategoryList)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+
+                        </div>
+                        <div class="form-group">
                             @Html.Label("Ürün Kodu")
                             <input id="ProductCode" name="ProductCode" class="form-control" />
 
@@ -108,6 +127,10 @@
                             @Html.Label("Fiyat")
                             <input id="Price" name="Price" class="form-control" />
 
+                        </div>
+                        <div class="form-group">
+                            <label for="Files">Dosya Seçiniz: </label>
+                            <input type="file" id="Files" name="Files" multiple />
                         </div>
                         <div class="form-group">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
@@ -139,6 +162,11 @@
                         $('#Price').val(res.data.Price);
                         $('#Quantity').val(res.data.Quantity);
                         $('#ProductId').val(res.data.Id);
+                        $('#Category').val(res.data.CategoryId);
+
+                    }
+                    else {
+
                     }
                 },
                 error: function (err) {
@@ -149,5 +177,5 @@
             });
         }
     </script>
-    
-    }
+
+}
