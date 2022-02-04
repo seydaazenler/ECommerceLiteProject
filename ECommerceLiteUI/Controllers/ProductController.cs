@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using ECommerceLiteBLL.Account;
 
 namespace ECommerceLiteUI.Controllers
 {
@@ -19,8 +20,8 @@ namespace ECommerceLiteUI.Controllers
         ProductRepo myProductRepo = new ProductRepo();
         CategoryRepo myCategoryRepo = new CategoryRepo();
         ProductPictureRepo myProductPictureRepo = new ProductPictureRepo();
-        
-        public ActionResult ProductList(int page=1, string search ="")
+
+        public ActionResult ProductList(int page = 1, string search = "", bool isNew = false)
         {
             List<Product> allProductList = new List<Product>();
             if (string.IsNullOrEmpty(search))
@@ -29,17 +30,29 @@ namespace ECommerceLiteUI.Controllers
             }
             else
             {
-                allProductList = myProductRepo.Queryable().Where(x => x.ProductName.Contains(search)).ToList();
+                allProductList =
+                    myProductRepo.Queryable()
+                    .Where(x => x.ProductName.Contains(search)).ToList();
             }
-                
-            return View(allProductList.ToPagedList(page,3));
+
+            if (isNew)
+            {
+                allProductList = myProductRepo.GetAll();
+                allProductList = allProductList.Where(x =>
+                x.RegisterDate >= DateTime.Now.AddDays(-1)).ToList();
+
+            }
+            var user = MembershipTools.GetNameSurname();
+            LogManager.LogMessage("geldi", userInfo: user, pageInfo: "Product/ProductList");
+            return View(allProductList.ToPagedList(page, 3));
         }
+
 
         [HttpGet]
         public ActionResult Create()
         {
             List<SelectListItem> subCategories = new List<SelectListItem>();
-            myCategoryRepo.Queryable().Where(x=> x.BaseCategoryId !=null).ToList().ForEach(x => subCategories.Add(new SelectListItem()
+            myCategoryRepo.Queryable().Where(x => x.BaseCategoryId != null).ToList().ForEach(x => subCategories.Add(new SelectListItem()
             {
                 Text = x.CategoryName,
                 Value = x.Id.ToString()
@@ -55,7 +68,7 @@ namespace ECommerceLiteUI.Controllers
             try
             {
                 List<SelectListItem> subCategories = new List<SelectListItem>();
-                myCategoryRepo.Queryable().Where(x=> x.BaseCategoryId != null).ToList().ForEach(x => subCategories.Add(new SelectListItem()
+                myCategoryRepo.Queryable().Where(x => x.BaseCategoryId != null).ToList().ForEach(x => subCategories.Add(new SelectListItem()
                 {
                     Text = x.CategoryName,
                     Value = x.Id.ToString()
@@ -167,6 +180,8 @@ namespace ECommerceLiteUI.Controllers
             {
                 ModelState.AddModelError("", "Beklenmedik hata oluştu!");
                 //TODO: ex loglanacak
+                var user = MembershipTools.GetNameSurname();
+                LogManager.LogMessage(ex.ToString(), userInfo: user, pageInfo: "Product/Create");
                 return View(model);
             }
         }
@@ -181,6 +196,8 @@ namespace ECommerceLiteUI.Controllers
             catch (Exception ex)
             {
                 //loglanacak
+                var user = MembershipTools.GetNameSurname();
+                LogManager.LogMessage(ex.ToString(), userInfo: user, pageInfo: "Product/CategoryProducts");
                 return View();
             }
         }
@@ -201,7 +218,7 @@ namespace ECommerceLiteUI.Controllers
                     //
                 }
                 int updateResult = myProductRepo.Update();
-                if (updateResult>0)
+                if (updateResult > 0)
                 {
                     return RedirectToAction("ProductList", "Product");
                 }
@@ -216,6 +233,8 @@ namespace ECommerceLiteUI.Controllers
             {
 
                 //ex loglanacak
+                var user = MembershipTools.GetNameSurname();
+                LogManager.LogMessage(ex.ToString(),userInfo: user, pageInfo: "Product/Edit");
                 //geçici
                 return RedirectToAction("ProductList", "Product");
             }
@@ -224,12 +243,12 @@ namespace ECommerceLiteUI.Controllers
         public JsonResult GetProductDetails(int id)
         {
             var product = myProductRepo.GetById(id);
-            if (product!=null)
+            if (product != null)
             {
                 var data = product.Adapt<ProductViewModel>();
-                return Json(new {isSuccess = true, data}, JsonRequestBehavior.AllowGet);
+                return Json(new { isSuccess = true, data }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { isSuccess = false}, JsonRequestBehavior.AllowGet);
+            return Json(new { isSuccess = false }, JsonRequestBehavior.AllowGet);
         }
     }
 }

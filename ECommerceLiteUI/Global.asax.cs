@@ -1,4 +1,5 @@
 ﻿using ECommerceLiteBLL.Account;
+using ECommerceLiteBLL.Settings;
 using ECommerceLiteEntity.Enums;
 using ECommerceLiteEntity.IdentityModels;
 using Microsoft.AspNet.Identity;
@@ -31,6 +32,9 @@ namespace ECommerceLiteUI
                         Name = theRole
                     });
             }
+
+            LogManager.LogMessage("*-*-*-*-APPLICATION STARTED*-*-*-*");
         }
+
     }
 }
