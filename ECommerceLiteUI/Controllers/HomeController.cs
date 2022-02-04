@@ -31,7 +31,7 @@ namespace ECommerceLiteUI.Controllers
             // var categoryList = myCategoryRepo.Queryable().Where(x => x.BaseCategoryId == null).Take(4).ToList(); 
             ViewBag.CategoryList = categoryList;
             //adedi 1 ve 1 den büyük olanları gösterecek
-            var productList = myProductRepo.Queryable().Where(x => x.Quantity >= 1).ToList();
+            var productList = myProductRepo.GetAll();
 
             List<ProductViewModel> model = new List<ProductViewModel>();
             foreach (var item in productList)

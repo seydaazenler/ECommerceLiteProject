@@ -59,8 +59,15 @@
                                     <img src="./img/product01.png" alt="">
                                 }
                                 <div class="product-label">
-                                    <span class="sale">-5%</span>
-                                    <span class="new">YENİ</span>
+                                    @if (item.Quantity > 0)
+                                    {
+                                        <span class="sale">STOK</span>
+                                        <span class="new">@item.Quantity</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="new">STOKTA YOK</span>
+                                    }
                                 </div>
                             </div>
                             <div class="product-body">
@@ -75,14 +82,22 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Favorilere Ekle</span></button>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">Karşılaştır</span></button>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Görüntüle</span></button>
                                 </div>
                             </div>
                             <div class="add-to-cart">
                                 @*<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>*@
-                                <a href="/Home/AddToCart/@item.Id" class="add-to-cart-btn">Sepete Ekle</a>
+
+                                @if (item.Quantity > 0)
+                                {
+                                    <a href="/Home/AddToCart/@item.Id" class="add-to-cart-btn">Sepete Ekle</a>
+                                }
+                                else
+                                {
+                                    <span>Ürün Stokta Yok</span>
+                                }
                             </div>
                         </div>
                         <!-- /product -->

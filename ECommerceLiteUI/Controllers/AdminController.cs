@@ -13,6 +13,7 @@ namespace ECommerceLiteUI.Controllers
     {
         //Global Alan
         OrderRepo myOrderRepo = new OrderRepo();
+        CategoryRepo myCategoryRepo = new CategoryRepo();
 
         // GET: Admin
         public ActionResult Dashboard()
@@ -24,5 +25,7 @@ namespace ECommerceLiteUI.Controllers
 
             return View();
         }
+
+
     }
 }
